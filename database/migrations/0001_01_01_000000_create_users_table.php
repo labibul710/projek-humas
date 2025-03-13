@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('divisi_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->bigInteger('nisn');
+            $table->bigInteger('phone');
+            $table->text('address');
+            $table->string('photo');
+            $table->enum('status', ['accepted', 'pending', 'rejected']);
             $table->rememberToken();
             $table->timestamps();
         });
