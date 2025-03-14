@@ -17,14 +17,15 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->foreignId('divisi_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->bigInteger('nisn');
-            $table->bigInteger('phone');
-            $table->text('address');
-            $table->string('photo');
-            $table->enum('status', ['accepted', 'pending', 'rejected']);
+            $table->foreignId('divisi_id')->nullable()->constrained('divisi')->cascadeOnUpdate();
+            $table->bigInteger('nisn')->unique()->nullable();
+            $table->bigInteger('phone')->unique()->nullable();
+            $table->text('address')->nullable();
+            $table->string('photo')->nullable();
+            $table->enum('status', ['accepted', 'pending', 'rejected'])->default('pending');
             $table->rememberToken();
             $table->timestamps();
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
